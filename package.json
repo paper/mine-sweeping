@@ -1,0 +1,23 @@
+{
+  "name": "mine-sweeping",
+  "version": "1.0.0",
+  "description": "🎮 扫一扫雷",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paper/mine-sweeping.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paper/mine-sweeping/issues"
+  },
+  "homepage": "https://github.com/paper/mine-sweeping#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}

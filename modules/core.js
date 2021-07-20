@@ -1,23 +1,56 @@
-import { shuffle } from './utils.js';
+import { shuffle } from "./utils.js";
 
 /**
- * 生成 row 行，col 列的数组，默认用 0 填充
+ * 生成 row 行，col 列的数组地图，
+ * 用 0 填充空白，用 100 填充地雷
  * @param row
  * @param col
  * @return [[]]
  */
-function createEmptyMap(row = 1, col = 1, val = 0) {
+function createMap(row = 2, col = 2, mine_number = 1) {
   const arr = [];
+  const defaultValue = 0;
+  const landminePosition = createLandminePosition(row, col, mine_number);
 
   for (let i = 0; i < row; i++) {
     let r = [];
 
     for (let j = 0; j < col; j++) {
-      r.push(val);
+      r.push(defaultValue);
     }
 
     arr.push(r);
   }
+
+  console.log(arr);
+
+  landminePosition.forEach(([row_pos, col_pos]) => {
+    console.log(row_pos, col_pos);
+
+    // 填充地雷
+    arr[row_pos][col_pos] = 100;
+
+    // 设置周边的空位值 +1，并且它不是地雷
+    // 上
+    if (row_pos - 1 >= 0 && arr[row_pos - 1][col_pos] !== 100) {
+      arr[row_pos - 1][col_pos] += 1;
+    }
+
+    // 下
+    if (row_pos + 1 <= row - 1 && arr[row_pos + 1][col_pos] !== 100) {
+      arr[row_pos + 1][col_pos] += 1;
+    }
+  
+    // 左
+    if (col_pos - 1 >= 0 && arr[row_pos][col_pos - 1] !== 100) {
+      arr[row_pos][col_pos - 1] += 1;
+    }
+  
+    // 右
+    if (col_pos + 1 <= col - 1 && arr[row_pos][col_pos + 1] !== 100) {
+      arr[row_pos][col_pos + 1] += 1;
+    }
+  });
 
   return arr;
 }
@@ -26,35 +59,29 @@ function createEmptyMap(row = 1, col = 1, val = 0) {
  * 生成地雷位置
  * @param row 地图的行数
  * @param col 地图的列数
- * @param num 你要创建多少个
+ * @param mine_number 你要创建多少个雷
  * @example 比如在 10x10的地图创建3个地雷，那么就是说在[0, 0] - [9, 9] 生产3个随机的坐标系，
  * 比如：[2, 3], [4, 6], [8, 8] 这3个雷
  *
  * 这里有个算法优化，如果直接使用随机算法，比如先随机生成1个雷，然后再生成第2个雷，虽然可以，但需要判断雷是否重复，如果重复得再次随机，看运气，如果运气不好，时间会长，这算法有缺陷。
  *
- * 所以这里参考洗牌算法，先把所有点取出来，再洗牌，取前 num 个，即雷的下标，
+ * 所以这里参考洗牌算法，先把所有点取出来，再洗牌，取前 mine_number 个
  * 时间复杂度 O(row * col)
  */
-function createLandminePosition(row = 1, col = 1, num = 1) {
+function createLandminePosition(row = 2, col = 2, mine_number = 1) {
   const allPosition = [];
-  
-  for(let i = 0; i < row; i++) {
-    for(let j = 0; j < col; j++) {
+
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
       allPosition.push([i, j]);
     }
   }
-  
-  console.log(allPosition);
+
   const max = allPosition.length;
-  
-  num = Math.min(num, max);
-  
-  
+
+  mine_number = Math.min(mine_number, max);
+
+  return shuffle(allPosition).slice(0, mine_number);
 }
 
-createLandminePosition(5, 5);
-
-// const ret = createEmptyMap(5,3);
-// console.log(ret);
-
-export { createEmptyMap };
+export { createMap, createLandminePosition };
