@@ -1,31 +1,31 @@
 console.log("mine-sweeping");
 
 import { createMap } from "./modules/core.js";
-import { MINE_VAL } from "./modules/config.js";
+import { MINE_VAL, MINE_STR } from "./modules/config.js";
 
 const MODE = {
   easy: {
     TYPE: "easy",
-    ROW: 10,
-    COL: 10,
-    MINE_NUMBER: 10,
+    MAX_ROW: 5,
+    MAX_COL: 5,
+    MINE_NUMBER: 5,
   },
   medium: 1,
   hard: 2,
 };
 
-const { TYPE, ROW, COL, MINE_NUMBER } = MODE.easy;
+const { TYPE, MAX_ROW, MAX_COL, MINE_NUMBER } = MODE.easy;
 
-const gameMap = createMap(ROW, COL, MINE_NUMBER);
+const gameMap = createMap(MAX_ROW, MAX_COL, MINE_NUMBER);
 
-console.log(gameMap);
-
+console.log('gameMap==', gameMap);
+console.log('==========================')
 let html = "";
 
-for (let row = 0; row < ROW; row++) {
+for (let row = 0; row < MAX_ROW; row++) {
   let temp = '';
-  for (let col = 0; col < COL; col++) {
-    const v = gameMap[row][col] === MINE_VAL ? 'x' : gameMap[row][col];
+  for (let col = 0; col < MAX_COL; col++) {
+    const v = gameMap[row][col] === MINE_VAL ? MINE_STR : gameMap[row][col];
     temp += `<li data-val="${v}" data-rowpos="${row}" data-colpos="${col}">${v}</li>`;
   }
   html += `<ul>${temp}</ul>`
@@ -35,10 +35,24 @@ const gameElement = document.getElementById("game");
 
 gameElement.innerHTML = html;
 
+const elementMap = [];
+
+gameElement.querySelectorAll('ul').forEach(ul => {
+  elementMap.push(ul.querySelectorAll('li'))
+});
+
+console.log(elementMap)
+
 gameElement.addEventListener('click', function (event) {
   const element = event.target;
   if (element.nodeName === 'LI' && element.getAttribute('data-val') !== null) {
-    element.innerText = element.getAttribute('data-val')
+    const val = element.getAttribute('data-val');
+
+    element.innerText = val;
+
+    if (val === MINE_STR) {
+      console.warn('你踩地雷了, Game Over');
+    }
   }
 }, false);
 

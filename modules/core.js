@@ -4,64 +4,67 @@ import { EMPTY_VAL, MINE_VAL } from "./config.js";
 /**
  * 生成 row 行，col 列的数组地图，
  * 用 0 填充空白，用 100 填充地雷
- * @param row
- * @param col
- * @return [[]]
+ * @param {number} maxRow 最大行
+ * @param {number} maxCol 最大列
+ * @param {number} mineNumber 地雷数
+ * @return {Array[]} map
  */
-function createMap(row = 2, col = 2, mine_number = 1) {
-  const arr = [];
-  const landminePosition = createLandminePosition(row, col, mine_number);
+function createMap(maxRow = 2, maxCol = 2, mineNumber = 1) {
+  const map = [];
+  const landminePosition = createLandminePosition(maxRow, maxCol, mineNumber);
 
-  for (let i = 0; i < row; i++) {
+  for (let row = 0; row < maxRow; row++) {
     let r = [];
 
-    for (let j = 0; j < col; j++) {
+    for (let col = 0; col < maxCol; col++) {
       r.push(EMPTY_VAL);
     }
 
-    arr.push(r);
+    map.push(r);
   }
 
-  landminePosition.forEach(([row_pos, col_pos]) => {
-    // console.log(row_pos, col_pos);
+  console.log('landminePosition=', landminePosition)
+
+  landminePosition.forEach(pos => {
+    const [row, col] = pos;
 
     // 填充地雷
-    arr[row_pos][col_pos] = MINE_VAL;
+    map[row][col] = MINE_VAL;
 
     // 8个位置，设置周边的空位值 +1，并且它不是地雷
     // 上区域
-    setMinePlus(row_pos - 1, col_pos - 1);
-    setMinePlus(row_pos - 1, col_pos);
-    setMinePlus(row_pos - 1, col_pos + 1);
+    setMinePlus(map, row - 1, col - 1);
+    setMinePlus(map, row - 1, col);
+    setMinePlus(map, row - 1, col + 1);
 
     // 下区域
-    setMinePlus(row_pos + 1, col_pos - 1);
-    setMinePlus(row_pos + 1, col_pos);
-    setMinePlus(row_pos + 1, col_pos + 1);
+    setMinePlus(map, row + 1, col - 1);
+    setMinePlus(map, row + 1, col);
+    setMinePlus(map, row + 1, col + 1);
 
     // 左，右
-    setMinePlus(row_pos, col_pos - 1);
-    setMinePlus(row_pos, col_pos + 1);
+    setMinePlus(map, row, col - 1);
+    setMinePlus(map, row, col + 1);
   });
 
-  return arr;
+  return map;
+}
 
-  function setMinePlus(row_pos, col_pos) {
-    try {
-      if (arr[row_pos][col_pos] !== MINE_VAL) {
-        arr[row_pos][col_pos] += 1;
-      }
-    } catch(e) {
-      // do nothing...
+function setMinePlus(map, row, col) {
+  try {
+    if (typeof map[row][col] === 'number' && map[row][col] !== MINE_VAL) {
+      map[row][col] += 1;
     }
+  } catch (e) {
+    // do nothing...
   }
 }
 
 /**
  * 生成地雷位置
- * @param row 地图的行数
- * @param col 地图的列数
- * @param mine_number 你要创建多少个雷
+ * @param maxRow 地图的行数
+ * @param maxCol 地图的列数
+ * @param mineNumber 你要创建多少个雷
  * @example 比如在 10x10的地图创建3个地雷，那么就是说在[0, 0] - [9, 9] 生产3个随机的坐标系，
  * 比如：[2, 3], [4, 6], [8, 8] 这3个雷
  *
@@ -70,22 +73,54 @@ function createMap(row = 2, col = 2, mine_number = 1) {
  * 所以这里参考洗牌算法，先把所有点取出来，再洗牌，取前 mine_number 个
  * 时间复杂度 O(row * col)
  */
-function createLandminePosition(row = 2, col = 2, mine_number = 1) {
+function createLandminePosition(maxRow = 2, maxCol = 2, mineNumber = 1) {
   const allPosition = [];
 
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < col; j++) {
-      allPosition.push([i, j]);
+  for (let row = 0; row < maxRow; row++) {
+    for (let col = 0; col < maxCol; col++) {
+      allPosition.push([row, col]);
     }
   }
 
   const max = allPosition.length;
 
-  mine_number = Math.min(mine_number, max);
+  mineNumber = Math.min(mineNumber, max);
 
-  return shuffle(allPosition).slice(0, mine_number);
+  return shuffle(allPosition).slice(0, mineNumber);
 }
 
+/**
+ * 洪水算法
+ * @param {Array[]} map 地图
+ * @param {number} row 第几行 
+ * @param {number} col 第几列
+ */
+function flood(map, row, col) {
+  if (map[row][col] !== EMPTY_VAL) {
+    return;
+  }
 
+  // 用来标记已经走过的路就不再走了
+  const cache = new Map();
+
+  // 用来收集需要展开的坐标
+  const ret = [];
+
+  function walk(row, col) {
+    const pos = [row, col];
+
+    // if (catch[])
+    // up
+    if (row > 0) {
+      if (map[row - 1][col] === EMPTY_VAL) {
+        const pos = [row, col];
+
+        ret.push([row, col]);
+        cache[[]]
+      }
+    }
+  }
+
+}
 
 export { createMap, createLandminePosition };
