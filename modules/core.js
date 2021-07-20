@@ -96,31 +96,60 @@ function createLandminePosition(maxRow = 2, maxCol = 2, mineNumber = 1) {
  * @param {number} col 第几列
  */
 function flood(map, row, col) {
+  const MAX_ROW = map.length;
+  const MAX_COL = map[0].length;
+
   if (map[row][col] !== EMPTY_VAL) {
     return;
   }
 
   // 用来标记已经走过的路就不再走了
-  const cache = new Map();
+  const cache = {};
 
   // 用来收集需要展开的坐标
   const ret = [];
 
+  // 深度优先遍历
   function walk(row, col) {
     const pos = [row, col];
+    const cacheKey = pos.join('-');
 
-    // if (catch[])
+    if (cache[cacheKey]) {
+      return;
+    }
+
+    cache[cacheKey] = true;
+
     // up
-    if (row > 0) {
-      if (map[row - 1][col] === EMPTY_VAL) {
-        const pos = [row, col];
+    tryWalk(row - 1, col);
 
+    // down
+    tryWalk(row + 1, col);
+
+    // left
+    tryWalk(row, col - 1);
+
+    // right
+    tryWalk(row, col + 1);
+  }
+
+  function tryWalk(row, col) {
+    try {
+      if (typeof map[row][col] === 'number') {
         ret.push([row, col]);
-        cache[[]]
+
+        if (map[row][col] === EMPTY_VAL) {
+          walk(row, col);
+        }
       }
+    } catch (err) {
+      // do nothing...
     }
   }
 
+  walk(row, col);
+
+  return ret;
 }
 
-export { createMap, createLandminePosition };
+export { createMap, createLandminePosition, flood };
