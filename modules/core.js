@@ -1,4 +1,5 @@
 import { shuffle } from "./utils.js";
+import { EMPTY_VAL, MINE_VAL } from "./config.js";
 
 /**
  * 生成 row 行，col 列的数组地图，
@@ -9,50 +10,51 @@ import { shuffle } from "./utils.js";
  */
 function createMap(row = 2, col = 2, mine_number = 1) {
   const arr = [];
-  const defaultValue = 0;
   const landminePosition = createLandminePosition(row, col, mine_number);
 
   for (let i = 0; i < row; i++) {
     let r = [];
 
     for (let j = 0; j < col; j++) {
-      r.push(defaultValue);
+      r.push(EMPTY_VAL);
     }
 
     arr.push(r);
   }
 
-  console.log(arr);
-
   landminePosition.forEach(([row_pos, col_pos]) => {
-    console.log(row_pos, col_pos);
+    // console.log(row_pos, col_pos);
 
     // 填充地雷
-    arr[row_pos][col_pos] = 100;
+    arr[row_pos][col_pos] = MINE_VAL;
 
-    // 设置周边的空位值 +1，并且它不是地雷
-    // 上
-    if (row_pos - 1 >= 0 && arr[row_pos - 1][col_pos] !== 100) {
-      arr[row_pos - 1][col_pos] += 1;
-    }
+    // 8个位置，设置周边的空位值 +1，并且它不是地雷
+    // 上区域
+    setMinePlus(row_pos - 1, col_pos - 1);
+    setMinePlus(row_pos - 1, col_pos);
+    setMinePlus(row_pos - 1, col_pos + 1);
 
-    // 下
-    if (row_pos + 1 <= row - 1 && arr[row_pos + 1][col_pos] !== 100) {
-      arr[row_pos + 1][col_pos] += 1;
-    }
-  
-    // 左
-    if (col_pos - 1 >= 0 && arr[row_pos][col_pos - 1] !== 100) {
-      arr[row_pos][col_pos - 1] += 1;
-    }
-  
-    // 右
-    if (col_pos + 1 <= col - 1 && arr[row_pos][col_pos + 1] !== 100) {
-      arr[row_pos][col_pos + 1] += 1;
-    }
+    // 下区域
+    setMinePlus(row_pos + 1, col_pos - 1);
+    setMinePlus(row_pos + 1, col_pos);
+    setMinePlus(row_pos + 1, col_pos + 1);
+
+    // 左，右
+    setMinePlus(row_pos, col_pos - 1);
+    setMinePlus(row_pos, col_pos + 1);
   });
 
   return arr;
+
+  function setMinePlus(row_pos, col_pos) {
+    try {
+      if (arr[row_pos][col_pos] !== MINE_VAL) {
+        arr[row_pos][col_pos] += 1;
+      }
+    } catch(e) {
+      // do nothing...
+    }
+  }
 }
 
 /**
@@ -83,5 +85,7 @@ function createLandminePosition(row = 2, col = 2, mine_number = 1) {
 
   return shuffle(allPosition).slice(0, mine_number);
 }
+
+
 
 export { createMap, createLandminePosition };

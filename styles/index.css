@@ -1,0 +1,27 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+#game ul {
+  display: flex;
+}
+
+#game ul li {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin: 1px;
+  font-size: 12px;
+}
+
+#game ul li:hover {
+  border-color: #999;
+}
