@@ -120,7 +120,8 @@ function reset() {
 function checkSuccess() {
 
   // 可以再优化，当 flag 已经用完时，再每次都判断。这样会减少很多判断次数！
-  
+  // 还可以再优化就是，已经是 open 的元素，其实是判断一次后，下次就再也不用判断了，因为它状态已经是固定的
+
   // [class = "open"] + [class = "flag"] = ALL_BOX_NUMBER
   for (let row = 0; row < MAX_ROW; row++) {
     for (let col = 0; col < MAX_COL; col++) {
