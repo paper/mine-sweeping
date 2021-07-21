@@ -1,6 +1,6 @@
 const EMPTY_VAL = 0;
 const MINE_VAL = 100;
-const MINE_STR = 'x';
+const MINE_STR = '💣';
 const OPEN_CLASSNAME = 'open';
 
 const MODE = {
