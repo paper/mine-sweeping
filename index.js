@@ -56,10 +56,10 @@ function openBox(elem) {
 }
 
 function gameStart() {
-  
+
   myTimer.stop();
   myTimer.start((i) => {
-    timeElement.textContent = i + '秒';
+    // timeElement.textContent = i + '秒';
   });
 
   gameMap = createMap(MAX_ROW, MAX_COL, MINE_NUMBER);
@@ -110,7 +110,12 @@ function checkSuccess() {
   }
 
   console.log('success done');
+  console.log('myTimer.stop()');
+  console.log('gameState.setOver()');
+  
   myTimer.stop();
+  gameState.setOver();
+  
   return true;
 }
 

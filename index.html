@@ -5,25 +5,67 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>minesweeping</title>
-  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./assets/styles/reset.css">
+  <link rel="stylesheet" href="./assets/styles/index.css">
 </head>
 <body>
+  <!--
+  https://emojixd.com/
+  -->
   <div class="wrapper">
-    <div class="top-bar">
-      <div class="mine-number">
-        <span id="JS_mine_number">0</span>
+    
+    <div class="menu-page">
+      <div class="banner">
+        <h1>扫雷</h1>
+        <h2>minesweeping</h2>
       </div>
-
-      <div class="btn-wrap">
-        <button id="JS_game_reset">reset</button>
-      </div>
-
-      <div class="time" id="JS_time">
-        0
+      
+      <div class="menu">
+        <nav>
+          <ol>
+            <li>
+              <a href="javascript:;">简单</a>
+            </li>
+            <li>
+              <a href="javascript:;">中等</a>
+            </li>
+            <li>
+              <a href="javascript:;">困难</a>
+            </li>
+            <li>
+              <a href="javascript:;">噩梦</a>
+            </li>
+          </ol>
+        </nav>
       </div>
     </div>
+    
+    <div class="game-page" style="display: none;">
+      <div class="top-bar">
+        <div class="mine-number">
+          <span id="JS_mine_number">0</span>
+          💥
+        </div>
 
-    <div id="game"></div>
+        <div class="btn-wrap">
+          <button id="JS_game_reset">reset</button>
+        </div>
+
+        <div class="time" id="JS_time">
+          0
+        </div>
+      </div>
+
+      <div id="game"></div>
+
+      <div class="help-btn-area" id="JS_game_help">辅助</div>
+    </div>
+    
+    <div class="me-page">
+      
+    </div>
+    
+    
   </div>
 
 <script type="module" src="index.js"></script>
