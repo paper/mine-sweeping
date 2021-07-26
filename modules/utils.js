@@ -1,3 +1,19 @@
+const gameState = {
+  __key: false,
+
+  isOver() {
+    return this.__key;
+  },
+
+  setOver() {
+    this.__key = true;
+  },
+
+  reset() {
+    this.__key = false;
+  }
+}
+
 /**
  * 这里实现一个洗牌
  * @param arr 给一个数组
@@ -20,4 +36,4 @@ function swap(arr, i, j) {
   arr[i] = temp;
 }
 
-export { shuffle };
+export { shuffle, gameState };

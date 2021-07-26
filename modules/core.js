@@ -90,12 +90,12 @@ function createLandminePosition(maxRow = 2, maxCol = 2, mineNumber = 1) {
 }
 
 /**
- * 洪水算法
+ * 深度遍历打开地图迷雾
  * @param {Array[]} map 地图
  * @param {number} row 第几行 
  * @param {number} col 第几列
  */
-function flood(map, row, col) {
+function openMist(map, row, col) {
   const MAX_ROW = map.length;
   const MAX_COL = map[0].length;
 
@@ -131,6 +131,18 @@ function flood(map, row, col) {
 
     // right
     tryWalk(row, col + 1);
+
+    // left-up
+    tryWalk(row - 1, col - 1);
+
+    // right-up
+    tryWalk(row - 1, col + 1);
+
+    // left-down
+    tryWalk(row + 1, col - 1);
+
+    // right-down
+    tryWalk(row + 1, col + 1);
   }
 
   function tryWalk(row, col) {
@@ -152,4 +164,4 @@ function flood(map, row, col) {
   return ret;
 }
 
-export { createMap, createLandminePosition, flood };
+export { createMap, createLandminePosition, openMist };

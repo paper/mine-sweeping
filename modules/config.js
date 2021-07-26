@@ -6,8 +6,8 @@ const OPEN_CLASSNAME = 'open';
 const MODE = {
   easy: {
     TYPE: "easy",
-    MAX_ROW: 10,
-    MAX_COL: 10,
+    MAX_ROW: 5,
+    MAX_COL: 5,
     MINE_NUMBER: 4,
   },
   medium: 1,
