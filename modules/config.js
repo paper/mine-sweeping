@@ -8,7 +8,7 @@ const MODE = {
     TYPE: "easy",
     MAX_ROW: 5,
     MAX_COL: 5,
-    MINE_NUMBER: 4,
+    MINE_NUMBER: 2,
   },
   medium: 1,
   hard: 2,

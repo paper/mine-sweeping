@@ -3,6 +3,9 @@ console.log("mine-sweeping start");
 import { gameState } from "./modules/utils.js";
 import { createMap, openMist } from "./modules/core.js";
 import { MODE, MINE_VAL, MINE_STR, EMPTY_VAL, OPEN_CLASSNAME } from "./modules/config.js";
+import { Timer } from "./modules/time.js";
+
+
 
 const { TYPE, MAX_ROW, MAX_COL, MINE_NUMBER } = MODE.easy;
 
@@ -12,9 +15,12 @@ console.log('ALL_BOX_NUMBER = ', ALL_BOX_NUMBER);
 const gameElement = document.getElementById("game");
 const mineNumberElement = document.getElementById("JS_mine_number");
 const gameResetElement = document.getElementById("JS_game_reset");
+const timeElement = document.getElementById("JS_time");
 
 let gameMap = [];
 let elementMap = [];
+
+const myTimer = new Timer();
 
 function addFlag() {
   let v = +mineNumberElement.innerText;
@@ -50,6 +56,12 @@ function openBox(elem) {
 }
 
 function gameStart() {
+  
+  myTimer.stop();
+  myTimer.start((i) => {
+    timeElement.textContent = i + '秒';
+  });
+
   gameMap = createMap(MAX_ROW, MAX_COL, MINE_NUMBER);
 
   // console.log('gameMap==', gameMap);
@@ -77,6 +89,7 @@ function gameStart() {
 // 重制
 function gameReset() {
   gameState.reset();
+  
   gameStart();
 }
 
@@ -97,6 +110,7 @@ function checkSuccess() {
   }
 
   console.log('success done');
+  myTimer.stop();
   return true;
 }
 
@@ -126,6 +140,7 @@ gameElement.addEventListener('click', function (event) {
 
     if (valStr === MINE_STR) {
       console.warn('你踩地雷了, Game Over');
+      myTimer.stop();
       gameState.setOver();
     } else {
       if (valNumber === EMPTY_VAL) {
