@@ -1,99 +1,112 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>minesweeping</title>
-  <link rel="stylesheet" href="./assets/styles/reset.css">
-  <link rel="stylesheet" href="./assets/styles/index.css">
-  <link href="/favicon.ico" rel="icon" type="image/x-icon" />
-</head>
-<body>
-  <!--
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>minesweeping</title>
+    <link rel="stylesheet" href="./assets/styles/reset.css" />
+    <link rel="stylesheet" href="./assets/styles/index.css" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+  </head>
+  <body>
+    <!--
   https://emojixd.com/
   -->
-  <div class="wrapper">
-    
-    <div class="menu-page" style="display: none;">
-      <div class="header">
-        <h1>扫雷</h1>
-        <h2>minesweeping</h2>
-      </div>
-      
-      <div class="menu">
-        <nav>
-          <ol>
-            <li>
-              <a href="javascript:;">😀 简单 - Easy</a>
-            </li>
-            <li>
-              <a href="javascript:;">🤔 中等 - Medium</a>
-            </li>
-            <li>
-              <a href="javascript:;">🥶 困难 - Hard</a>
-            </li>
-            <li>
-              <a href="javascript:;">😱 噩梦 - Hell</a>
-            </li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-    
-    <div class="game-page" style="display: none;">
-      <div class="top-bar">
-        <div class="mine-number">
-          <span id="JS_mine_number">0</span>
-          💥
+    <div class="wrapper">
+      <div class="menu-page" style="display: block">
+        <div class="header">
+          <h2>扫雷</h2>
+          <h3>minesweeping</h3>
         </div>
 
-        <div class="btn-wrap">
-          <button id="JS_game_reset">reset</button>
+        <div class="menu">
+          <nav>
+            <ol>
+              <li>
+                <a href="javascript:;">😀 简单</a>
+              </li>
+              <li>
+                <a href="javascript:;">🤔 中等</a>
+              </li>
+              <li>
+                <a href="javascript:;">🥶 困难</a>
+              </li>
+              <li>
+                <a href="javascript:;">😱 噩梦</a>
+              </li>
+            </ol>
+          </nav>
         </div>
 
-        <div class="time" id="JS_time">
-          0
+        <div class="go-me-page">
+          <a href="javascript:;">🏆 个人中心 🏆</a>
         </div>
       </div>
+      <!-- end menu-page -->
 
-      <div id="game"></div>
+      <div class="game-page" style="display: none">
+        <div class="top-bar">
+          <div class="mine-number">
+            <span id="JS_mine_number">0</span>
+            💥
+          </div>
 
-      <div class="help-btn-area" id="JS_game_help">辅助</div>
-    </div>
-    
-    <div class="me-page">
-      <h2>个人中心</h2>
+          <div class="btn-wrap">
+            <button id="JS_game_reset">reset</button>
+          </div>
 
-      <div class="score">
-        <table>
-          <tr>
-            <th>游戏难度</th>
-            <th>最佳成绩</th>
-          </tr>
-          <tr>
-            <td>😀 简单 - Easy</td>
-            <td>00:00:13</td>
-          </tr>
-          <tr>
-            <td>🤔 中等 - Medium</td>
-            <td>00:01:23</td>
-          </tr>
-          <tr>
-            <td>🥶 困难 - Hard</td>
-            <td>00:05:59</td>
-          </tr>
-          <tr>
-            <td>😱 噩梦 - Hell</td>
-            <td>01:10:30</td>
-          </tr>
-        </table>
+          <div class="time" id="JS_time">0</div>
+        </div>
+
+        <div id="game"></div>
+
+        <div class="help-btn-area" id="JS_game_help">辅助</div>
       </div>
-    </div>
-    
-    
-  </div>
+      <!-- end game-page -->
 
-<script type="module" src="index.js"></script>
-</body>
+      <div class="me-page" style="display: none">
+        <div class="header">
+          <h2>个人中心</h2>
+          <h3>Personal Center</h3>
+        </div>
+
+        <div class="score">
+          <table>
+            <tr>
+              <th>游戏难度</th>
+              <th>最佳成绩</th>
+            </tr>
+            <tr>
+              <td>😀 简单</td>
+              <td>00:00:13</td>
+            </tr>
+            <tr>
+              <td>🤔 中等</td>
+              <td>00:01:23</td>
+            </tr>
+            <tr>
+              <td>🥶 困难</td>
+              <td>00:05:59</td>
+            </tr>
+            <tr>
+              <td>😱 噩梦</td>
+              <td>01:10:30</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="back">
+          <a href="javascript:;">🔙 Back</a>
+        </div>
+      </div>
+      <!-- end me-page -->
+    </div>
+    <!-- end wrapper -->
+
+    <script type="module" src="index.js"></script>
+  </body>
 </html>

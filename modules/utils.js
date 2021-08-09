@@ -11,8 +11,8 @@ const gameState = {
 
   reset() {
     this.__key = false;
-  }
-}
+  },
+};
 
 /**
  * 这里实现一个洗牌

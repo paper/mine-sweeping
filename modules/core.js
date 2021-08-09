@@ -23,9 +23,9 @@ function createMap(maxRow = 2, maxCol = 2, mineNumber = 1) {
     map.push(r);
   }
 
-  console.log('landminePosition=', landminePosition)
+  console.log("landminePosition=", landminePosition);
 
-  landminePosition.forEach(pos => {
+  landminePosition.forEach((pos) => {
     const [row, col] = pos;
 
     // 填充地雷
@@ -52,7 +52,7 @@ function createMap(maxRow = 2, maxCol = 2, mineNumber = 1) {
 
 function setMinePlus(map, row, col) {
   try {
-    if (typeof map[row][col] === 'number' && map[row][col] !== MINE_VAL) {
+    if (typeof map[row][col] === "number" && map[row][col] !== MINE_VAL) {
       map[row][col] += 1;
     }
   } catch (e) {
@@ -92,7 +92,7 @@ function createLandminePosition(maxRow = 2, maxCol = 2, mineNumber = 1) {
 /**
  * 深度遍历打开地图迷雾
  * @param {Array[]} map 地图
- * @param {number} row 第几行 
+ * @param {number} row 第几行
  * @param {number} col 第几列
  */
 function openMist(map, row, col) {
@@ -112,7 +112,7 @@ function openMist(map, row, col) {
   // 深度优先遍历
   function walk(row, col) {
     const pos = [row, col];
-    const cacheKey = pos.join('-');
+    const cacheKey = pos.join("-");
 
     if (cache[cacheKey]) {
       return;
@@ -147,7 +147,7 @@ function openMist(map, row, col) {
 
   function tryWalk(row, col) {
     try {
-      if (typeof map[row][col] === 'number') {
+      if (typeof map[row][col] === "number") {
         ret.push([row, col]);
 
         if (map[row][col] === EMPTY_VAL) {
