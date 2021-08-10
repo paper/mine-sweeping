@@ -1,6 +1,10 @@
+:root {
+  --bg-color: #e06147;
+}
+
 html,
 body {
-  background-color: #e06147;
+  background-color: var(--bg-color);
   color: #fff;
   font-size: 16px;
 }
@@ -12,11 +16,10 @@ body {
 
 .header {
   text-align: center;
-  padding: 100px 0 50px;
+  padding: 80px 0 50px;
 }
 
 .header h2 {
-  display: none;
   font-size: 28px;
 }
 
@@ -37,20 +40,32 @@ body {
 .menu-page .menu {
   text-align: center;
 }
+.menu-page .menu nav ol li {
+  margin: 20px 0;
+}
+
 .menu-page .menu nav ol li a {
   display: block;
-  margin: 10px auto;
-  padding: 10px;
+  margin: 0 auto;
+  padding: 16px 0;
+  font-size: 16px;
   border-radius: 10px;
   background-color: #c54c34;
   color: #fff;
   text-decoration: none;
   width: 60%;
   border-bottom: 3px solid #a13f2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .menu-page .menu nav ol li a:active {
-  background-color: #b34029;
-  transform: translateY(2px);
+  border-color: var(--bg-color);
+  transform: translateY(3px);
+}
+.menu-page .menu nav ol li a span {
+  font-size: 24px;
+  padding-right: 0.2em;
 }
 .go-me-page {
   text-align: center;
