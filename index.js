@@ -10,6 +10,7 @@ import {
   OPEN_CLASSNAME,
 } from "./modules/config.js";
 import { Timer } from "./modules/time.js";
+import { bindEvent } from "./modules/event.js";
 
 const { TYPE, MAX_ROW, MAX_COL, MINE_NUMBER } = MODE.easy;
 
@@ -229,4 +230,7 @@ gameElement.addEventListener(
   false
 );
 
+bindEvent();
+
 gameStart();
+

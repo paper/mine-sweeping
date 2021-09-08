@@ -17,9 +17,9 @@
   https://emojixd.com/
   -->
     <div class="wrapper">
-      <div class="menu-page" style="display: block">
+      <div id="js-menu-page" class="menu-page" style="display: block">
         <div class="header">
-          <h2>扫雷</h2>
+          <!-- <h2>扫雷</h2> -->
           <h3>minesweeping</h3>
         </div>
 
@@ -27,28 +27,28 @@
           <nav>
             <ol>
               <li>
-                <a href="javascript:;"><span>😃</span>简单</a>
+                <a data-action="go-game-page" href="javascript:;"><span>😃</span>简单</a>
               </li>
               <li>
-                <a href="javascript:;"><span>😕</span>中等</a>
+                <a data-action="go-game-page" href="javascript:;"><span>😕</span>中等</a>
               </li>
               <li>
-                <a href="javascript:;"><span>🥶</span>困难</a>
+                <a data-action="go-game-page" href="javascript:;"><span>🥶</span>困难</a>
               </li>
               <li>
-                <a href="javascript:;"><span>😱</span>噩梦</a>
+                <a data-action="go-game-page" href="javascript:;"><span>😱</span>噩梦</a>
               </li>
             </ol>
           </nav>
         </div>
 
-        <div class="go-me-page">
-          <a href="javascript:;">🏆 个人中心 🏆</a>
+        <div class="personal-center">
+          <a data-action="go-me-page" href="javascript:;">🏆 个人中心 🏆</a>
         </div>
       </div>
       <!-- end menu-page -->
 
-      <div class="game-page" style="display: none">
+      <div id="js-game-page" class="game-page" style="display: none">
         <div class="top-bar">
           <div class="mine-number">
             <span id="JS_mine_number">0</span>
@@ -65,10 +65,14 @@
         <div id="game"></div>
 
         <div class="help-btn-area" id="JS_game_help">辅助</div>
+
+        <div class="back">
+          <a href="javascript:;" data-action="go-menu-page">🔙 Back</a>
+        </div>
       </div>
       <!-- end game-page -->
 
-      <div class="me-page" style="display: none">
+      <div id="js-me-page" class="me-page" style="display: none">
         <div class="header">
           <h2>个人中心</h2>
           <h3>Personal Center</h3>
@@ -100,7 +104,7 @@
         </div>
 
         <div class="back">
-          <a href="javascript:;">🔙 Back</a>
+          <a href="javascript:;" data-action="go-menu-page">🔙 Back</a>
         </div>
       </div>
       <!-- end me-page -->
